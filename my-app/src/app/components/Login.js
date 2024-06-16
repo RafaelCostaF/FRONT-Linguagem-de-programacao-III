@@ -1,5 +1,5 @@
 'use client'
-import { Box, TextField, Typography, Button, Container } from "@mui/material"
+import { Box, TextField, Typography, Button, Container, Paper, Card } from "@mui/material"
 import { useState } from "react"
 
 function Login({ onSubmit }) {
@@ -12,15 +12,27 @@ function Login({ onSubmit }) {
     };
 
     return (
-        <Container component="main" maxWidth="xs">
-            <Box
+        <Container 
+            component="main" 
+            maxWidth="xs" 
+            sx={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                minHeight: '100vh' 
+            }}
+        >
+            <Card
+                elevation={3}
                 component="form"
                 onSubmit={handleSubmit}
                 sx={{
-                    marginTop: 8,
+                    padding: 4,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'left',
+                    alignItems: 'center',
+                    width: '100%',
+                    borderRadius: '20px'
                 }}
             >
                 <Typography component='h1' variant="h5">
@@ -34,7 +46,7 @@ function Login({ onSubmit }) {
                     variant="filled"
                     value={login}
                     onChange={(e) => setLogin(e.target.value)}
-                    sx={{ marginTop: 2}}
+                    sx={{ marginTop: 2 }}
                 />
                 <Typography component='h1' variant="h5" sx={{ marginTop: 2 }}>
                     Senha
@@ -52,15 +64,14 @@ function Login({ onSubmit }) {
                     sx={{ marginTop: 2 }}
                 />
                 <Button
-                    sx={{ marginTop: 4, backgroundColor:"gray" }}
+                    sx={{ marginTop: 4}}
                     type="submit"
                     fullWidth
                     variant='contained'
-                    
                 >
                     Entrar
                 </Button>
-            </Box>
+            </Card>
         </Container>
     );
 }
