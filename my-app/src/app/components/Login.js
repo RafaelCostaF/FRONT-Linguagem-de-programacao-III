@@ -30,12 +30,12 @@ function Login({ onSubmit }) {
                     padding: 4,
                     display: 'flex',
                     flexDirection: 'column',
-                    alignItems: 'center',
+                    alignItems: 'left',
                     width: '100%',
                     borderRadius: '20px'
                 }}
             >
-                <Typography component='h1' variant="h5">
+                <Typography sx={{marginTop: 2, fontSize: 20}}>
                     Login
                 </Typography>
                 <TextField
@@ -48,7 +48,7 @@ function Login({ onSubmit }) {
                     onChange={(e) => setLogin(e.target.value)}
                     sx={{ marginTop: 2 }}
                 />
-                <Typography component='h1' variant="h5" sx={{ marginTop: 2 }}>
+                <Typography component='h1' variant="h5" sx={{ fontSize: 20, marginTop: 2 }}>
                     Senha
                 </Typography>
                 <TextField
