@@ -35,7 +35,7 @@ function Login({ onSubmit }) {
                     borderRadius: '20px'
                 }}
             >
-                <Typography sx={{marginTop: 2, fontSize: 20}}>
+                <Typography component='h1' variant="h5" sx={{marginTop: 2, fontSize: 20}}>
                     Login
                 </Typography>
                 <TextField
