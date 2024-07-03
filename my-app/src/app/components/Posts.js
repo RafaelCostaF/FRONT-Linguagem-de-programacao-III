@@ -105,14 +105,7 @@ const Posts = ({
               {detailedContent || "No detailed content available"}
             </Typography>
           )}
-          <Typography variant="h6" gutterBottom style={{ marginTop: 20 }}>
-            Comments:
-          </Typography>
-          {comments.map((comment, index) => (
-            <Typography key={index} paragraph>
-              {comment}
-            </Typography>
-          ))}
+          
         </CardContent>
       </Collapse>
     </Card>
