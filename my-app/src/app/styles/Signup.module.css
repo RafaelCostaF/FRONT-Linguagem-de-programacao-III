@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.card {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.title {
+    margin-top: 16px;
+    font-size: 20px;
+}
+
+.input {
+    margin-top: 16px;
+}
+
+.submitButton {
+    margin-top: 32px;
+}

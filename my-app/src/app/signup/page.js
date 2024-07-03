@@ -1,61 +1,55 @@
 'use client'
 import React, { useState } from 'react';
 import { Typography, TextField, Button, Container, Card } from '@mui/material';
+import { useRouter } from 'next/navigation';
+import styles from '../styles/Signup.module.css';
+import { signup } from '../util/api'; // Importa a função signup do arquivo utils/api.js
 
-function Signup({ onSignup }) {
-    const [name, setName] = useState('');
+function Signup() {
+    const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const router = useRouter();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const newUser = {
-            name,
-            email,
-            password
-        };
-        onSignup(newUser);
-        setName('');
-        setEmail('');
-        setPassword('');
+        try {
+            console.log('Enviando dados para cadastro:', { fullName, email, password }); // Verifica os dados sendo enviados
+            const newUser = await signup(email, password, fullName);
+            console.log('Usuário cadastrado:', newUser);
+            router.push('/'); // Redireciona para a página inicial após o cadastro bem-sucedido
+        } catch (error) {
+            console.error('Erro no cadastro:', error);
+            setError('Erro ao cadastrar usuário. Verifique os dados e tente novamente.');
+        }
     };
 
     return (
         <Container 
             component="main" 
             maxWidth="xs" 
-            sx={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
-                minHeight: '100vh' 
-            }}
+            className={styles.container}
         >
             <Card
                 elevation={3}
                 component="form"
                 onSubmit={handleSubmit}
-                sx={{
-                    padding: 4,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'left',
-                    width: '100%',
-                    borderRadius: '20px'
-                }}
+                className={styles.card}
             >
-                <Typography component='h1' variant="h5" sx={{marginTop: 2, fontSize: 20}}>
+                <Typography component='h1' variant="h5" className={styles.title}>
                     Cadastro
                 </Typography>
+                {error && <Typography color="error" className={styles.error}>{error}</Typography>}
                 <TextField
                     required
-                    id="name"
-                    label="Nome"
+                    id="fullName"
+                    label="Nome Completo"
                     fullWidth
                     variant="filled"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    sx={{ marginTop: 2 }}
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    className={styles.input}
                 />
                 <TextField
                     required
@@ -66,7 +60,7 @@ function Signup({ onSignup }) {
                     variant="filled"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    sx={{ marginTop: 2 }}
+                    className={styles.input}
                 />
                 <TextField
                     required
@@ -78,13 +72,13 @@ function Signup({ onSignup }) {
                     variant="filled"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    sx={{ marginTop: 2 }}
+                    className={styles.input}
                 />
                 <Button
-                    sx={{ marginTop: 4}}
                     type="submit"
                     fullWidth
                     variant='contained'
+                    className={styles.submitButton}
                 >
                     Cadastrar
                 </Button>

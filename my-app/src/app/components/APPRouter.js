@@ -1,7 +1,7 @@
 // components/APPRouter.js
 'use client'
 import React from 'react';
-import { useRouter } from 'next/navigation'; // Importe de next/navigation em vez de next/router
+import { useRouter } from 'next/router'; // Importe de next/router para manipulação de rotas
 import Login from '../login/page';
 import Signup from '../signup/page';
 import ProfilePage from './profilePage';

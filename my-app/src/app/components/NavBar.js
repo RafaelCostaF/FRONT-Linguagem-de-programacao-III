@@ -21,6 +21,9 @@ const NavBar = () => {
                 <Link href="/signup" passHref>
                     <Button color="inherit">Signup</Button>
                 </Link>
+                <Link href="/chat" passHref>
+                    <Button color="inherit">Mensagem</Button>
+                </Link>
             </Toolbar>
         </AppBar>
     );
