@@ -1,5 +1,5 @@
-'use client';
-import * as React from 'react';
+// Posts.js
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -16,6 +16,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { red } from '@mui/material/colors';
+import '../styles.css';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -38,14 +39,15 @@ const Posts = ({
   mediaSrc = '', 
   detailedContent = [] 
 }) => {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [comments, setComments] = useState([]);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
   return (
-    <Card>
+    <Card className='post'>
       <CardHeader
         avatar={
           <Avatar style={{ backgroundColor: avatarColor }} aria-label="user">
@@ -70,7 +72,7 @@ const Posts = ({
         />
       )}
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography className='postFont'>
           {content}
         </Typography>
       </CardContent>
@@ -103,6 +105,14 @@ const Posts = ({
               {detailedContent || "No detailed content available"}
             </Typography>
           )}
+          <Typography variant="h6" gutterBottom style={{ marginTop: 20 }}>
+            Comments:
+          </Typography>
+          {comments.map((comment, index) => (
+            <Typography key={index} paragraph>
+              {comment}
+            </Typography>
+          ))}
         </CardContent>
       </Collapse>
     </Card>

@@ -1,27 +1,19 @@
+// pages.js
+import { AppBar, Container } from "@mui/material";
+import "./styles.css";
+import NavBar from "./components/NavBar";
+import Login from "./login/page";
 
-import Login from "./components/Login";
-import { Container } from "@mui/material";
-import './page.module.css'
-import Posts from "./components/Posts";
+import AppRouter from "./components/APPRouter";
+import Signup from "./signup/page";
+import ProfilePage from "./components/profilePage";
 
-
-
-const detailedContent = "Ola"
 export default function Home() {
   return (
-    <Container>
-          <Posts
-        avatarLetter="U"
-        avatarColor="#f44336" // substituindo o uso de red[500]
-        username="John Doe"
-        timestamp="June 17, 2024"
-        content="This is a sample social media post. Check out the image below!"
-        mediaType="image"
-        mediaSrc="/static/images/sample.jpg"
-        detailedContent={detailedContent}
-      />
+    <Container className="container">
+      
+      <ProfilePage/>
+      
     </Container>
-    
   );
 }
- 

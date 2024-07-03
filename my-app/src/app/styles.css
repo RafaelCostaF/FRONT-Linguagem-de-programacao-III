@@ -1,0 +1,17 @@
+.post {
+    max-width: 40vw;
+    max-height: 50vw;
+    border-radius: 20px;
+    padding: 5px;
+    margin: auto;
+    margin-bottom: 20px;
+    
+}
+
+.postfont {
+    font-size: 24px;
+}
+
+.container {
+    align-content: center;
+}

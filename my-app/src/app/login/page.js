@@ -1,14 +1,18 @@
-'use client'
-import { Box, TextField, Typography, Button, Container, Paper, Card } from "@mui/material"
-import { useState } from "react"
+'use client';
+import React, { useState } from 'react';
+import { Typography, TextField, Button, Container, Card } from '@mui/material';
 
-function Login({ onSubmit }) {
+function Login({ onLogin }) {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        onSubmit({ login, password });
+        const credentials = {
+            login,
+            password
+        };
+        onLogin(credentials);
     };
 
     return (
@@ -48,9 +52,6 @@ function Login({ onSubmit }) {
                     onChange={(e) => setLogin(e.target.value)}
                     sx={{ marginTop: 2 }}
                 />
-                <Typography component='h1' variant="h5" sx={{ fontSize: 20, marginTop: 2 }}>
-                    Senha
-                </Typography>
                 <TextField
                     id="password"
                     label="Senha"
