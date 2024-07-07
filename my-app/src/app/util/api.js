@@ -46,3 +46,33 @@ export const createMessage = async (message, token) => {
   });
   return response.data;
 };
+export const getAllFriends = async () => {
+  const response = await api.get('/friends');
+  return response.data;
+};
+
+export const addFriend = async (friendId) => {
+  await api.post(`/friends/${friendId}`);
+};
+
+export const getAllGroups = async () => {
+  const response = await api.get('/groups');
+  return response.data;
+};
+
+export const createGroup = async (group) => {
+  await api.post('/groups', group);
+};
+
+export const joinGroup = async (groupId) => {
+  await api.post(`/groups/${groupId}/join`);
+};
+
+export const getAllEvents = async () => {
+  const response = await api.get('/events');
+  return response.data;
+};
+
+export const createEvent = async (event) => {
+  await api.post('/events', event);
+};

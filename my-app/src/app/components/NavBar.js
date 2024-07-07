@@ -21,6 +21,9 @@ const NavBar = () => {
         <Button color="inherit" component={Link} href="/messages">
           Mensagens
         </Button>
+        <Button color="inherit" component={Link} href="/friends">Friends</Button>
+        <Button color="inherit" component={Link} href="/groups">Groups</Button>
+        <Button color="inherit" component={Link} href="/events">Events</Button>
         {!token ? (
           <>
             <Button color="inherit" component={Link} href="/login">
