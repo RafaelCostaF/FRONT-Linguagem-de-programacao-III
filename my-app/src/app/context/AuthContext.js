@@ -1,21 +1,38 @@
-import React, { createContext, useState } from 'react';
+'use client';
+import { createContext, useContext, useState, useEffect } from 'react';
+import {jwtDecode} from 'jwt-decode';
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState('user1'); // Simulação de login como 'user1'
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
 
-    const login = (username) => {
-        setUser(username);
-    };
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+      setUser(jwtDecode(storedToken));
+    }
+  }, []);
 
-    const logout = () => {
-        setUser(null);
-    };
+  const login = (newToken) => {
+    setToken(newToken);
+    setUser(jwtDecode(newToken));
+    localStorage.setItem('token', newToken);
+  };
 
-    return (
-        <AuthContext.Provider value={{ user, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  const logout = () => {
+    setToken(null);
+    setUser(null);
+    localStorage.removeItem('token');
+  };
+
+  return (
+    <AuthContext.Provider value={{ token, user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
+
+export const useAuth = () => useContext(AuthContext);

@@ -1,15 +1,15 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, Container } from '@mui/material';
 import PostForm from '../components/PostForm';
-import Posts from '../components/Posts';
+import PostList from '../components/PostList';
+import { getAllPosts, createPost } from '../util/api';
 import { useAuth } from '../context/AuthContext';
-import { getMyPosts, createPost } from '../util/api';
 import { useRouter } from 'next/navigation';
 
-const ProfilePage = () => {
+const PostsPage = () => {
   const [posts, setPosts] = useState([]);
-  const { user, token, logout } = useAuth();
+  const { token } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const ProfilePage = () => {
 
   const fetchPosts = async () => {
     try {
-      const postsData = await getMyPosts(token);
+      const postsData = await getAllPosts(token);
       setPosts(postsData);
     } catch (error) {
       console.error('Erro ao buscar posts:', error);
@@ -38,25 +38,13 @@ const ProfilePage = () => {
     }
   };
 
-  const handleLogout = () => {
-    logout();
-    router.push('/login');
-  };
-
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div>
-      <Typography variant="h4">{user.fullName}'s Profile</Typography>
-      <Button variant="contained" color="secondary" onClick={handleLogout}>
-        Logout
-      </Button>
+    <Container>
+      <Typography variant="h4">Posts</Typography>
       <PostForm onPostSubmit={handlePostSubmit} />
-      <Posts posts={posts} />
-    </div>
+      <PostList posts={posts} />
+    </Container>
   );
 };
 
-export default ProfilePage;
+export default PostsPage;

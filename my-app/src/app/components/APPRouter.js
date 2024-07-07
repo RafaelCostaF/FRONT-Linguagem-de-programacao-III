@@ -1,11 +1,13 @@
-// components/APPRouter.js
-'use client'
+// src/app/components/AppRouter.js
+'use client';
+
 import React from 'react';
-import { useRouter } from 'next/router'; // Importe de next/router para manipulação de rotas
+import { useRouter } from 'next/navigation';
 import Login from '../login/page';
 import Signup from '../signup/page';
-import ProfilePage from './profilePage';
+import ProfilePage from '../profile/page';
 import Home from '../page'; // Ajuste de importação para a página inicial
+import ChatPage from '../chat/page';
 
 const AppRouter = () => {
     const router = useRouter();
@@ -15,7 +17,9 @@ const AppRouter = () => {
             {router.pathname === '/login' && <Login />}
             {router.pathname === '/signup' && <Signup />}
             {router.pathname === '/profile' && <ProfilePage />}
+            {router.pathname === '/chat' && <ChatPage />}
             {router.pathname === '/' && <Home />} {/* Ajuste para a rota da página inicial */}
+            
         </div>
     );
 };

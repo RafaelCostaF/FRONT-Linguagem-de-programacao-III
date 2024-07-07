@@ -1,15 +1,16 @@
+'use client'
 
-import { AppBar, Container } from "@mui/material";
-import "./styles.css";
-
-import ProfilePage from "./profile/page";
-
-export default function Home() {
-  return (
-    <Container className="container">
-      
-      <ProfilePage/>
-      
-    </Container>
-  );
+import NavBar from './components/NavBar';
+import { AuthProvider } from './context/AuthContext'
+import {Login} from './login/page' 
+function HomePage({ Component, pageProps }) {
+    return (
+        <>
+            <NavBar/>
+        </>
+        
+    );
 }
+
+export default HomePage;
+

@@ -1,32 +1,43 @@
-import React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
+'use client';
+import { AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { useAuth } from '../context/AuthContext';
 import Link from 'next/link';
 
 const NavBar = () => {
-    return (
-        <AppBar position="static">
-            <Toolbar>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    My App
-                </Typography>
-                <Link href="/" passHref>
-                    <Button color="inherit">Home</Button>
-                </Link>
-                <Link href="/login" passHref>
-                    <Button color="inherit">Login</Button>
-                </Link>
-                <Link href="/signup" passHref>
-                    <Button color="inherit">Signup</Button>
-                </Link>
-                <Link href="/chat" passHref>
-                    <Button color="inherit">Mensagem</Button>
-                </Link>
-            </Toolbar>
-        </AppBar>
-    );
+  const { token, logout } = useAuth();
+
+  return (
+    <AppBar position="static">
+      <Toolbar>
+        <Typography variant="h6">
+          Minha Rede Social
+        </Typography>
+        <Button color="inherit" component={Link} href="/profile">
+          Perfil
+        </Button>
+        <Button color="inherit" component={Link} href="/posts">
+          Posts
+        </Button>
+        <Button color="inherit" component={Link} href="/messages">
+          Mensagens
+        </Button>
+        {!token ? (
+          <>
+            <Button color="inherit" component={Link} href="/login">
+              Login
+            </Button>
+            <Button color="inherit" component={Link} href="/signup">
+              Cadastro
+            </Button>
+          </>
+        ) : (
+          <Button color="inherit" onClick={logout}>
+            Logout
+          </Button>
+        )}
+      </Toolbar>
+    </AppBar>
+  );
 };
 
 export default NavBar;

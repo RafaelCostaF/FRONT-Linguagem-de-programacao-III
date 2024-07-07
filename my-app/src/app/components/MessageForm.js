@@ -2,20 +2,20 @@
 import { useState } from 'react';
 import { Button, TextField, Card, Typography } from '@mui/material';
 
-const PostForm = ({ onPostSubmit }) => {
+const MessageForm = ({ onMessageSubmit }) => {
   const [content, setContent] = useState('');
-  const [image, setImage] = useState('');
+  const [receiverId, setReceiverId] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onPostSubmit({ content, image });
+    onMessageSubmit({ content, receiverId });
     setContent('');
-    setImage('');
+    setReceiverId('');
   };
 
   return (
     <Card component="form" onSubmit={handleSubmit}>
-      <Typography variant="h6">Criar Post</Typography>
+      <Typography variant="h6">Enviar Mensagem</Typography>
       <TextField
         required
         label="Conteúdo"
@@ -26,16 +26,17 @@ const PostForm = ({ onPostSubmit }) => {
         onChange={(e) => setContent(e.target.value)}
       />
       <TextField
-        label="Imagem (URL base64)"
+        required
+        label="ID do Receptor"
         fullWidth
-        value={image}
-        onChange={(e) => setImage(e.target.value)}
+        value={receiverId}
+        onChange={(e) => setReceiverId(e.target.value)}
       />
       <Button type="submit" fullWidth variant='contained'>
-        Postar
+        Enviar
       </Button>
     </Card>
   );
 };
 
-export default PostForm;
+export default MessageForm;

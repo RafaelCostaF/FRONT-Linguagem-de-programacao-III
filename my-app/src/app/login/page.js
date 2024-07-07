@@ -1,79 +1,61 @@
-'use client'
-import React, { useState } from 'react';
-import { Typography, TextField, Button, Container, Card } from '@mui/material';
+'use client';
+import { useState } from 'react';
+import { Button, Typography, TextField, Container, Card } from '@mui/material';
+import { authenticate } from '../util/api';
+import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
 import styles from '../styles/Login.module.css';
-import { login } from '../util/api'; // Importa a função login do arquivo utils/api.js
 
-function Login() {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-    const router = useRouter();
+const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const { login } = useAuth();
+  const router = useRouter();
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            console.log('Enviando dados para login:', { email, password }); // Verifica os dados sendo enviados
-            const loginResponse = await login(email, password);
-            console.log('Usuário autenticado:', loginResponse);
-            router.push('/'); // Redireciona para a página inicial após o login bem-sucedido
-        } catch (error) {
-            console.error('Erro no login:', error);
-            setError('Erro ao fazer login. Verifique os dados e tente novamente.');
-        }
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await authenticate(email, password);
+      login(response.token);
+      router.push('/profile');
+    } catch (error) {
+      setError('Credenciais inválidas. Tente novamente.');
+    }
+  };
 
-    return (
-        <Container 
-            component="main" 
-            maxWidth="xs" 
-            className={styles.container}
-        >
-            <Card
-                elevation={3}
-                component="form"
-                onSubmit={handleSubmit}
-                className={styles.card}
-            >
-                <Typography component='h1' variant="h5" className={styles.title}>
-                    Login
-                </Typography>
-                {error && <Typography color="error" className={styles.error}>{error}</Typography>}
-                <TextField
-                    required
-                    id="email"
-                    label="Email"
-                    type="email"
-                    fullWidth
-                    variant="filled"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className={styles.input}
-                />
-                <TextField
-                    required
-                    id="password"
-                    label="Senha"
-                    type="password"
-                    autoComplete="current-password"
-                    fullWidth
-                    variant="filled"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className={styles.input}
-                />
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant='contained'
-                    className={styles.submitButton}
-                >
-                    Entrar
-                </Button>
-            </Card>
-        </Container>
-    );
-}
+  return (
+    <Container component="main" maxWidth="xs" className={styles.container}>
+      <Card component="form" onSubmit={handleSubmit} className={styles.card}>
+        <Typography component='h1' variant="h5" className={styles.title}>
+          Login
+        </Typography>
+        <TextField
+          required
+          label="Email"
+          fullWidth
+          variant="filled"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={styles.input}
+        />
+        <TextField
+          required
+          label="Senha"
+          type="password"
+          fullWidth
+          variant="filled"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className={styles.input}
+        />
+        {error && <Typography variant="body2" color="error" className={styles.error}>{error}</Typography>}
+        <Button type="submit" fullWidth variant='contained' className={styles.button}>
+          Login
+        </Button>
+      </Card>
+    </Container>
+  );
+};
 
-export default Login;
+export default LoginPage;
