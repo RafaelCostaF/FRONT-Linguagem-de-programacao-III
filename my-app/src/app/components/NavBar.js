@@ -12,9 +12,7 @@ const NavBar = () => {
         <Typography variant="h6">
           Minha Rede Social
         </Typography>
-        <Button color="inherit" component={Link} href="/profile">
-          Perfil
-        </Button>
+        <Button color="inherit" component={Link} href="/">Home</Button>
         <Button color="inherit" component={Link} href="/posts">
           Posts
         </Button>

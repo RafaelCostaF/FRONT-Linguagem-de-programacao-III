@@ -3,22 +3,22 @@ import { useState } from 'react';
 import { Button, Typography, TextField, Container, Card } from '@mui/material';
 import { authenticate } from '../util/api';
 import { useAuth } from '../context/AuthContext';
-import { useRouter } from 'next/navigation';
-import styles from '../styles/Login.module.css';
+import { useRouter } from 'next/navigation'; // Importação correta do useRouter
+import styles from '../styles/Login.module.css'; // Importação dos estilos
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { login } = useAuth();
-  const router = useRouter();
+  const router = useRouter(); // Utilização correta do useRouter
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await authenticate(email, password);
-      login(response.token);
-      router.push('/profile');
+      login(response.token); // Realiza o login com o token recebido
+      router.push('/'); // Redireciona para a página inicial
     } catch (error) {
       setError('Credenciais inválidas. Tente novamente.');
     }
