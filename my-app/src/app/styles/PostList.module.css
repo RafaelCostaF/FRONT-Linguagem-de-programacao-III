@@ -1,0 +1,33 @@
+.list {
+    width: 100%;
+  }
+  
+  .listItem {
+    margin-bottom: 15px;
+  }
+  
+  .card {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cardContent {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .content {
+    margin-bottom: 10px;
+  }
+  
+  .image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+  .timestamp {
+    text-align: right;
+  }
+  

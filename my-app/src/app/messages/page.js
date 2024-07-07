@@ -1,11 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Typography, Container } from '@mui/material';
+import { Typography, Container, Box, Card } from '@mui/material';
 import MessageForm from '../components/MessageForm';
 import MessageList from '../components/MessageList';
 import { getAllMessages, createMessage } from '../util/api';
 import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
+import styles from '../styles/Messages.module.css';
+import NavBar from '../components/NavBar';
 
 const MessagesPage = () => {
   const [messages, setMessages] = useState([]);
@@ -39,10 +41,13 @@ const MessagesPage = () => {
   };
 
   return (
-    <Container>
-      <Typography variant="h4">Mensagens</Typography>
-      <MessageForm onMessageSubmit={handleMessageSubmit} />
-      <MessageList messages={messages} />
+    <Container maxWidth="md" className={styles.container}>
+        <NavBar/>
+      <Typography variant="h4" className={styles.title}>Mensagens</Typography>
+      <Box className={styles.messageSection}>
+        <MessageForm onMessageSubmit={handleMessageSubmit} />
+        <MessageList messages={messages} />
+      </Box>
     </Container>
   );
 };

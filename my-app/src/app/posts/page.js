@@ -1,11 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Button, Typography, Container } from '@mui/material';
+import { Typography, Container, Box, Card } from '@mui/material';
 import PostForm from '../components/PostForm';
 import PostList from '../components/PostList';
 import { getAllPosts, createPost } from '../util/api';
 import { useAuth } from '../context/AuthContext';
 import { useRouter } from 'next/navigation';
+import styles from '../styles/Posts.module.css';
+import NavBar from '../components/NavBar';
 
 const PostsPage = () => {
   const [posts, setPosts] = useState([]);
@@ -39,10 +41,13 @@ const PostsPage = () => {
   };
 
   return (
-    <Container>
-      <Typography variant="h4">Posts</Typography>
-      <PostForm onPostSubmit={handlePostSubmit} />
-      <PostList posts={posts} />
+    <Container maxWidth="md" className={styles.container}>
+        <NavBar/>
+      <Typography variant="h4" className={styles.title}>Posts</Typography>
+      <Box className={styles.postSection}>
+        <PostForm onPostSubmit={handlePostSubmit} />
+        <PostList posts={posts} />
+      </Box>
     </Container>
   );
 };

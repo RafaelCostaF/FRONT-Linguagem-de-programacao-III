@@ -18,7 +18,7 @@ const PostForm = ({ onPostSubmit }) => {
       <Typography variant="h6">Criar Post</Typography>
       <TextField
         required
-        label="Conteúdo"
+        label="No que você está pensando"
         fullWidth
         multiline
         rows={4}

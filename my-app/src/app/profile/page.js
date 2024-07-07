@@ -1,11 +1,13 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Button, Typography } from '@mui/material';
+import { Button, Typography, Container, Box, Card } from '@mui/material';
 import PostForm from '../components/PostForm';
-import Posts from '../components/Posts';
+import PostList from '../components/PostList';
 import { useAuth } from '../context/AuthContext';
 import { getMyPosts, createPost } from '../util/api';
 import { useRouter } from 'next/navigation';
+import styles from '../styles/Profile.module.css';
+import NavBar from '../components/NavBar';
 
 const ProfilePage = () => {
   const [posts, setPosts] = useState([]);
@@ -48,14 +50,14 @@ const ProfilePage = () => {
   }
 
   return (
-    <div>
-      <Typography variant="h4">{user.fullName}'s Profile</Typography>
-      <Button variant="contained" color="secondary" onClick={handleLogout}>
-        Logout
-      </Button>
-      <PostForm onPostSubmit={handlePostSubmit} />
-      <Posts posts={posts} />
-    </div>
+    <Container maxWidth="md" className={styles.container}>
+      <NavBar/>
+      
+      <Box className={styles.postSection}>
+        <PostForm onPostSubmit={handlePostSubmit} />
+        <PostList posts={posts} />
+      </Box>
+    </Container>
   );
 };
 
